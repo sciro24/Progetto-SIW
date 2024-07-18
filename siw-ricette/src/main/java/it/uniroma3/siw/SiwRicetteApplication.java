@@ -9,5 +9,4 @@ public class SiwRicetteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SiwRicetteApplication.class, args);
 	}
-
 }
