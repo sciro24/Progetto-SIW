@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>HomePage</title>
+	<link rel="stylesheet" href="/css/stile2.css" />
+</head>
+
+<body>
+	<div class="container">
+
+	
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+	
+	
+	<div><img src="/images/logo-siw.png" width="10%" /></div>
+	<h1>BENVENUTO NEL MIGLIOR SITO DI RICETTE ROMANE</h1>
+	<div>
+		<a href="/ricetta">Elenco Ricette</a><br><br>
+		<a href="/formSearchRicette">Cerca Ricetta</a><br><br>
+		<a href="/formNewRecensione">Scrivi una Recensione</a>
+     </div>
+    </div>
+
+
+</body>
+
+</html>

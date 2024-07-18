@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ricetta</title>
+  <link rel="stylesheet" href="/css/stile2.css" />
+  <style>
+    .ricetta-details {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="container">
+
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+
+  <div><img src="/images/logo-siw.png" width="10%" /></a></div>
+  <h1>Dettagli Ricetta</h1>
+  <div th:if="${ricetta}">
+    <div class="ricetta-details">
+      <h2><span th:text="${ricetta.nome}"></span></h2>
+      <p><b>Tempo di preparazione:</b> <span th:text="${ricetta.tempoPreparazione}"></span> minuti</p>
+      <p><b>Descrizione: </b><span th:text="${ricetta.descrizione}"></span></p>
+       <ul>
+		<b>Ingredienti usati: </b> 
+		<div th:if="${ricetta.ingredienti == null or ricetta.ingredienti.isEmpty()}">nessun ingrediente e' stato aggiunto</div>
+		<li th:each="ingrediente : ${ricetta.ingredienti}">
+			<a th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
+				th:text="${ingrediente.nome} "></a>
+		</li>
+	</ul>
+    </div>
+   
+  </div>
+  <div th:unless="${ricetta}">Non esiste</div>
+  
+    <!-- Elenco delle Recensioni -->
+    <div>
+        <h2>Recensioni</h2>
+        <ul>
+			<div th:if="${ricetta.recensioni.isEmpty()}">nessuna recensione e' stata ancora aggiunta</div>
+            <li th:each="recensione : ${ricetta.recensioni}">
+                <strong th:text="${recensione.utente.nome}">Nome Utente</strong> - 
+                <span th:text="${recensione.voto}">Valutazione</span>/5
+                <p th:text="${recensione.commento}">Commento</p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

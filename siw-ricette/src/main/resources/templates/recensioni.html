@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ELENCO RICETTE</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+	
+	<body>
+    <div class="container">
+        <h2>Lista Recensioni</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ricetta</th>
+                    <th>Voto</th>
+                    <th>Commento</th>
+                    <th>Utente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="recensione : ${recensioni}">
+                    <td th:text="${recensione.ricetta.nome}">Ricetta</td>
+                    <td th:text="${recensione.voto}">Voto</td>
+                    <td th:text="${recensione.commento}">Commento</td>
+                    <td th:text="${recensione.utente.nome}">Utente</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

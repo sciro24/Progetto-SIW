@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Scelta ingredienti</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+  
+	<div><a href="/"><img src="/images/logo-siw.png" width="10%"/></a></div>
+	<h1 th:text="'Ingredienti della ricetta ' + ${ricetta.nome}"></h1>
+	<div th:if="${ricetta.ingredienti.isEmpty()}">Non ci sono ingredienti per questa ricetta</div>
+	<ul>
+		<li th:each="ingrediente : ${ricetta.ingredienti}">
+			<span th:text="${ingrediente.nome}"></span>
+			<a th:href="@{'/admin/removeIngredienteFromRicetta/'+ ${ingrediente.id}+'/'+${ricetta.id}}">Cancella</a>
+		</li>
+	</ul>
+	<div>
+		Ingredienti che si possono aggiungere:
+		<ul>
+			<li th:each="ingrediente : ${ingredientiToAdd}">
+				<span th:text="${ingrediente.nome}"></span>
+				<a th:href="@{'/admin/addIngredienteToRicetta/'+ ${ingrediente.id}+'/'+${ricetta.id}}">Aggiungi</a>
+			</li>
+		</ul>
+	<div>
+	<div>
+		<a th:href="@{'/admin/formUpdateRicetta/'+ ${ricetta.id}}"><button type="button">Fine</button></a>
+	</div>
+</body>
+
+</html>
