@@ -57,3 +57,11 @@ position: absolute;
 top: 10px;
 left: 10px;
 }
+
+/* Rimuove i bullet points dall'elenco */
+ul {
+    list-style-type: none; /* Rimuove i bullet points */
+    padding: 0;           /* Rimuove il padding predefinito */
+    margin: 0;            /* Rimuove il margine predefinito */
+}
+

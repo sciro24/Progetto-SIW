@@ -26,10 +26,10 @@ import jakarta.validation.Valid;
 public class RicettaController {
 	@Autowired 
 	private RicettaService ricettaService;
-	
-//	@Autowired
-//	private UtenteService utenteService;
-//	
+
+	//	@Autowired
+	//	private UtenteService utenteService;
+	//	
 	@Autowired 
 	private IngredienteRepository ingredienteRepository;
 
@@ -41,7 +41,7 @@ public class RicettaController {
 		model.addAttribute("ricetta", new Ricetta());
 		return "admin/formNewRicetta.html";
 	}
-	
+
 
 	@GetMapping(value="/admin/formUpdateRicetta/{id}")
 	public String formUpdateRicetta(@PathVariable("id") Long id, Model model) {
@@ -54,21 +54,21 @@ public class RicettaController {
 	public String indexRicetta() {
 		return "admin/indexRicetta.html";
 	}
-	
+
 	@GetMapping(value="/admin/manageRicette")
 	public String manageRicette(Model model) {
 		model.addAttribute("ricette", this.ricettaService.findAll());
 		return "admin/manageRicette.html";
 	}
-	
-	
+
+
 	@PostMapping("/admin/ricetta")
 	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model, UserDetails userDetails) {
-		
+
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
-//			Utente utente = this.utenteService.findByEmail(userDetails.getUsername());
-//			ricetta.setUtente(utente);
+			//			Utente utente = this.utenteService.findByEmail(userDetails.getUsername());
+			//			ricetta.setUtente(utente);
 			this.ricettaService.save(ricetta); 
 			model.addAttribute("ricetta", ricetta);
 			return "ricetta.html";
@@ -77,8 +77,8 @@ public class RicettaController {
 		}
 	}
 
-	
-	
+
+
 
 	@GetMapping("/ricetta/{id}")
 	public String getRicetta(@PathVariable("id") Long id, Model model) {
@@ -91,7 +91,13 @@ public class RicettaController {
 		model.addAttribute("ricette", this.ricettaService.findAll());
 		return "ricette.html";
 	}
-	
+
+	@GetMapping("/ricetteVegane")
+	public String ricetteVegane(Model model) {
+		model.addAttribute("ricette", this.ricettaService.findVegane());
+		return "ricetteVegane.html";
+	}
+
 	@GetMapping("/formSearchRicette")
 	public String formSearchRicette() {
 		return "formSearchRicette.html";
@@ -102,8 +108,8 @@ public class RicettaController {
 		model.addAttribute("ricette", this.ricettaService.findByTempoPreparazione(minuti));
 		return "foundRicette.html";
 	}
-	
-	
+
+
 	@GetMapping("/admin/updateIngredienti/{id}")
 	public String updateIngredienti(@PathVariable("id") Long id, Model model) {
 
@@ -121,15 +127,15 @@ public class RicettaController {
 		Set<Ingrediente> ingredienti = ricetta.getIngredienti();
 		ingredienti.add(ingrediente);
 		this.ricettaService.save(ricetta);
-		
+
 		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(ricettaId);
-		
+
 		model.addAttribute("ricetta", ricetta);
 		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
 
 		return "admin/ingredientiToAdd.html";
 	}
-	
+
 	@GetMapping(value="/admin/removeIngredienteFromRicetta/{ingredienteId}/{ricettaId}")
 	public String removeIngredienteFromRicetta(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = this.ricettaService.findById(ricettaId);
@@ -139,7 +145,7 @@ public class RicettaController {
 		this.ricettaService.save(ricetta);
 
 		List<Ingrediente> ingredientiToAdd = ingredientiToAdd(ricettaId);
-		
+
 		model.addAttribute("ricetta", ricetta);
 		model.addAttribute("ingredientiToAdd", ingredientiToAdd);
 
@@ -154,6 +160,6 @@ public class RicettaController {
 		}
 		return ingredientiToAdd;
 	}
-	
+
 
 }

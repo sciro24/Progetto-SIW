@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ricette Vegane</title>
+    <link rel="stylesheet" href="/css/stile2.css" />
+</head>
+<body>
+    <div class="container">
+		
+        <!-- PULSANTE LOGIN/LOGOUT -->
+	    <header>
+            <nav>
+                <a href="/" id="home-button">Home</a>
+                <div class="auth-buttons">
+                    <div th:if="${userDetails}">
+                        <span th:text="${userDetails.username}"></span>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div><img src="/images/logo-siw.png" width="10%" /></div>
+        <h1>Ricette Vegane</h1>
+        <div th:if="${ricette.isEmpty()}">
+            <p>Non ci sono ricette vegane disponibili.</p>
+        </div>
+        <div th:if="${!ricette.isEmpty()}">
+            <ul>
+		<li th:each="ricetta : ${ricette}">
+			<a th:href="@{'/ricetta' + '/' + ${ricetta.id}}"
+				th:text="${ricetta.nome} + ' (' + ${ricetta.tempoPreparazione}+' minuti)'"></a>
+		</li>
+	</ul>
+        </div>
+    </div>
+</body>
+</html>
