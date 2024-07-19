@@ -85,7 +85,7 @@
 	
     <div class="container">
         <h2>Scrivi una Recensione</h2>
-        <form action="/recensioni" method="post">
+        <form th:action="@{/recensioni}" method="post">
             <div class="form-group">
                 <label for="ricetta">Seleziona Ricetta:</label>
                 <select id="ricetta" name="ricettaId" class="form-control" required>

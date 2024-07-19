@@ -39,7 +39,7 @@ public class RecensioneController {
 	}
 
 	@PostMapping("/recensioni")
-	public String salvaRecensione(@RequestParam Long ricettaId, @RequestParam int voto, @RequestParam String commento, UserDetails userDetails) {
+	public String salvaRecensione(@RequestParam Long ricettaId, @RequestParam int voto, @RequestParam String commento, UserDetails userDetails,Model model) {
 		// Recupera l'utente attualmente loggato
 		Utente utente = utenteService.findByUsername(userDetails.getUsername());
 
@@ -51,6 +51,7 @@ public class RecensioneController {
 		recensione.setCommento(commento);
 
 		// Salva la recensione
+		model.addAttribute("recensione", recensione);
 		recensioneService.save(recensione);
 
 		return "recensione.html";

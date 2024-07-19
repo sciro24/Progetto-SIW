@@ -3,10 +3,11 @@
 
 <head>
 	<title>Ricette Trovate</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/stile2.css" />
 </head>
 
 <body>
+    <div class="container">
 
 	<!-- PULSANTE LOGIN/LOGOUT -->
 	<header>
@@ -21,7 +22,7 @@
 
 	</header>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="10%"/></a></div>
+	<div><img src="/images/logo-siw.png" width="10%"/></a></div>
 	<h1>Ricette che soddisfano i requisiti</h1>
 	<div th:if="${ricette != null}">
 	<div th:if="${ricette.isEmpty()}">Non ci sono Ricette che soddisfano i requisiti</div>

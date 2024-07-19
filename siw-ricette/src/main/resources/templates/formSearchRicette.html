@@ -2,10 +2,11 @@
 <html>
 <head>
 	<title>Cerca Ricetta</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/stile2.css" />
 </head>
 
 <body>
+    <div class="container">
 
 	<!-- PULSANTE LOGIN/LOGOUT -->
 	<header>
@@ -20,7 +21,7 @@
 
 	</header>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="10%"/></a></div>
+	<div><img src="/images/logo-siw.png" width="10%"/></a></div>
 	<h1>Cerca Ricetta per Tempo di Preparazione</h1>
 	<form th:action="@{/searchRicette}" method="post">
 		<div>Tempo di Preparazione: <input type="text" th:value="${minuti}" name="minuti" />
