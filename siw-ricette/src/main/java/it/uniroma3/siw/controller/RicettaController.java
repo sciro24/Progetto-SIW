@@ -1,5 +1,8 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validator.RicettaValidator;
 import it.uniroma3.siw.model.Ingrediente;
@@ -27,9 +31,6 @@ public class RicettaController {
 	@Autowired 
 	private RicettaService ricettaService;
 
-	//	@Autowired
-	//	private UtenteService utenteService;
-	//	
 	@Autowired 
 	private IngredienteRepository ingredienteRepository;
 
@@ -63,21 +64,40 @@ public class RicettaController {
 
 
 	@PostMapping("/admin/ricetta")
-	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model, UserDetails userDetails) {
-
+	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model, UserDetails userDetails, @RequestParam("immagine") MultipartFile file) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			//			Utente utente = this.utenteService.findByEmail(userDetails.getUsername());
-			//			ricetta.setUtente(utente);
-			this.ricettaService.save(ricetta); 
+//			 if (!file.isEmpty()) {
+//		            try {
+//		                // Ottieni il nome originale del file
+//		                String fileName = file.getOriginalFilename();
+//
+//		                // Crea il percorso di salvataggio relativo alla directory static
+//		                String filePath = "images/uploaded/" + fileName;
+//
+//		                // Costruisci il percorso assoluto
+//		                String absolutePath = Paths.get("src/main/resources/static", filePath).toString();
+//
+//		                // Salva il file
+//		                File destinationFile = new File(absolutePath);
+//		                file.transferTo(destinationFile);
+//
+//		                // Imposta il percorso dell'immagine nella ricetta
+//		                ricetta.setImmagine(filePath);
+//		            } catch (IOException e) {
+//		                e.printStackTrace();
+//		                bindingResult.rejectValue("immagine", "error.immagine", "Impossibile salvare l'immagine");
+//		            }
+//		        }
+
+			// Salva la ricetta
+			this.ricettaService.save(ricetta);
 			model.addAttribute("ricetta", ricetta);
 			return "ricetta.html";
 		} else {
-			return "admin/formNewRicetta.html"; 
+			return "admin/formNewRicetta.html";
 		}
 	}
-
-
 
 
 	@GetMapping("/ricetta/{id}")

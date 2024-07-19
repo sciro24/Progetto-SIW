@@ -49,6 +49,9 @@ public class Ricetta {
 	@NotNull(message = "Il tempo di preparazione non può essere nullo")
 	private Integer tempoPreparazione;
 	
+//	@Column(length = 2000)
+//	public String immagine; //percorso immagine
+	
 	public Long getId() {
 		return id;
 	}
@@ -101,6 +104,15 @@ public class Ricetta {
          recensioni.remove(recensione);
          recensione.setRicetta(null);
      }
+     
+
+//     public String getImmagine() {
+//         return immagine;
+//     }
+//
+//     public void setImmagine(String immagine) {
+//         this.immagine = immagine;
+//     }
      
 	@Override
 	public int hashCode() {

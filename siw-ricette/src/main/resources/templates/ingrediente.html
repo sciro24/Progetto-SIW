@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ingrediente</title>
-	<link rel="stylesheet" href="/css/stile2.css" />
+<head>
+  <title>Ingrediente</title>
+  <link rel="stylesheet" href="/css/stile2.css" />
 </head>
 
 <body>
     <div class="container">
 
-	<!-- PULSANTE LOGIN/LOGOUT -->
-	    <header>
+        <!-- PULSANTE LOGIN/LOGOUT -->
+        <header>
             <nav>
                 <a href="/" id="home-button">Home</a>
                 <div class="auth-buttons">
@@ -24,13 +24,18 @@
             </nav>
         </header>
 
-
-	<div><img src="/images/logo-siw.png" width="10%"/></div>
-    <h1>Dettagli Ingrediente</h1>
-    <div th:if="${ingrediente}">
-        <span th:text="${ingrediente.nome} ">Pomodoro</span>
-       <!-- <span><img width="5%" th:src=${ingrediente.urlOfPicture} /></span> -->
+        <div><img src="/images/logo-siw.png" width="10%" /></div>
+        <h1>Dettagli Ingrediente</h1>
+        <div th:if="${ingrediente}">
+            <h2><span th:text="${ingrediente.nome}">Pomodoro</span></h2>
+            <p>
+                <b>Tipo:</b>
+                <span th:if="${ingrediente.vegano}" style="color: green; font-weight: bold;">Vegano</span>
+                <span th:unless="${ingrediente.vegano}" style="color: red; font-weight: bold;">Non Vegano</span>
+            </p>
+            <!-- <span><img width="5%" th:src="${ingrediente.urlOfPicture}" /></span> -->
+        </div>
+        <div th:unless="${ingrediente}">Non esistono ingredienti</div>
     </div>
-    <div th:unless="${ingrediente}">Non esistono ingredienti</div>
-  </body>
+</body>
 </html>

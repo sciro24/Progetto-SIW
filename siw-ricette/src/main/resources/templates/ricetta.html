@@ -35,6 +35,7 @@
   <div th:if="${ricetta}">
     <div class="ricetta-details">
       <h2><span th:text="${ricetta.nome}"></span></h2>
+      <img th:src="@{/images/uploaded/{imageName}(imageName=${ricetta.immagine})}" alt="Immagine Ricetta" />
       <p><b>Tempo di preparazione:</b> <span th:text="${ricetta.tempoPreparazione}"></span> minuti</p>
       <p><b>Descrizione: </b><span th:text="${ricetta.descrizione}"></span></p>
        <ul>
