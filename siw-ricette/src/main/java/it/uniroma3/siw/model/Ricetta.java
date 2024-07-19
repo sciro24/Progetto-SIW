@@ -18,6 +18,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Ricetta {
@@ -32,6 +33,7 @@ public class Ricetta {
 	private String nome;
 	
 	@NotBlank(message = "La descrizione non può essere vuota")
+    @Size(min = 1, max = 1000, message = "La descrizione deve contenere tra {min} e {max} caratteri")
 	private String descrizione;
 	
 
