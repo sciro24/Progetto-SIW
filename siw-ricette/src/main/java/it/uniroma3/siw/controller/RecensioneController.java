@@ -1,17 +1,15 @@
 package it.uniroma3.siw.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Recensione;
-import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.service.RecensioneService;
 import it.uniroma3.siw.service.RicettaService;
@@ -64,19 +62,31 @@ public class RecensioneController {
 	}
 
 
-	@GetMapping("/recensioni/ricetta")
-	public String trovaRecensionePerRicetta(@RequestParam Long ricettaId, Model model) {
-		Ricetta ricetta = ricettaService.findById(ricettaId);
-		List<Recensione> recensioni = recensioneService.findByRicetta(ricetta);
-		model.addAttribute("recensioni", recensioni);
-		return "recensioni.html";
+//	@GetMapping("/recensioni/ricetta")
+//	public String trovaRecensionePerRicetta(@RequestParam Long ricettaId, Model model) {
+//		Ricetta ricetta = ricettaService.findById(ricettaId);
+//		List<Recensione> recensioni = recensioneService.findByRicetta(ricetta);
+//		model.addAttribute("recensioni", recensioni);
+//		return "recensioni.html";
+//	}
+//	
+//	@GetMapping("/recensioni/utente")
+//	public String trovaRecensionePerUtente(@RequestParam Long utenteId, Model model) {
+//		Utente utente = utenteService.getUser(utenteId);
+//		List<Recensione> recensioni = recensioneService.findByUtente(utente);
+//		model.addAttribute("recensioni", recensioni);
+//		return "recensioni.html";
+//	}
+	
+	@GetMapping("/recensione/{id}")
+	public String getRecensione(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("recensione", this.recensioneService.findById(id));
+		return "recensione.html";
 	}
 	
-	@GetMapping("/recensioni/utente")
-	public String trovaRecensionePerUtente(@RequestParam Long utenteId, Model model) {
-		Utente utente = utenteService.getUser(utenteId);
-		List<Recensione> recensioni = recensioneService.findByUtente(utente);
-		model.addAttribute("recensioni", recensioni);
+	@GetMapping("/recensione")
+	public String getRecensioni(Model model) {
+		model.addAttribute("recensioni", this.recensioneService.findAll());
 		return "recensioni.html";
 	}
 

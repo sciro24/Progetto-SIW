@@ -1,6 +1,7 @@
 package it.uniroma3.siw.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,12 @@ public class RecensioneService {
 	public Recensione save(Recensione recensione) {
 		return recensioneRepository.save(recensione);
 	}
+	
+	public Recensione findById(Long id) {
+		Optional<Recensione> recensione = this.recensioneRepository.findById(id);
+		return recensione.orElse(null);
 
+	}
 	public List<Recensione> findByUtente(Utente utente) {
 		return recensioneRepository.findByUtente(utente);
 	}
