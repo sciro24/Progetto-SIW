@@ -53,9 +53,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
                 .authorizeHttpRequests()
                 //.requestMatchers("/**").permitAll()
                 // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-                .requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico","/recensioni","/formSearchRicette/**","/ricetta/**","/ingrediente/**","/foundRicette/**").permitAll()
+                .requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico","/recensioni","/formSearchRicette","/searchRicette","/ricetta/**","/ingrediente/**","/foundRicette").permitAll()
         		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
-                .requestMatchers(HttpMethod.POST,"/register", "/login","/formSearchRicette/**","/foundRicette/**").permitAll()
+                .requestMatchers(HttpMethod.POST,"/register", "/login","/formSearchRicette/**","/foundRicette/**", "/searchRicette").permitAll()
                 .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
         		// tutti gli utenti autenticati possono accere alle pagine rimanenti 

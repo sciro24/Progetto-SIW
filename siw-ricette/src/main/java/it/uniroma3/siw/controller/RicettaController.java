@@ -103,8 +103,6 @@ public class RicettaController {
 		return "foundRicette.html";
 	}
 	
-
-	
 	
 	@GetMapping("/admin/updateIngredienti/{id}")
 	public String updateIngredienti(@PathVariable("id") Long id, Model model) {
