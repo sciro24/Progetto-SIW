@@ -34,10 +34,7 @@ public class Ricetta {
 	@NotBlank(message = "La descrizione non può essere vuota")
 	private String descrizione;
 	
-//	@OneToOne
-//	private Utente utente;
-//	
-	
+
 	@ManyToMany
 	private Set<Ingrediente> ingredienti;
 	
@@ -118,19 +115,5 @@ public class Ricetta {
 		Ricetta other = (Ricetta) obj;
 		return Objects.equals(nome, other.nome);
 	}
-	
-	
-//	public Utente getUtente() {
-//		return utente;
-//	}
-//	public void setUtente(Utente utente) {
-//		this.utente = utente;
-//	}
-//	
-	
-	
-
-
-
 
 }

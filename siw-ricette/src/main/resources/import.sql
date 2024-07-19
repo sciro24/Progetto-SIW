@@ -1,0 +1,1 @@
+insert into ricetta(id, descrizione, nome, tempo_preparazione) values(1, 'Far bollire la pasta', 'Pasta al Burro', 30);
