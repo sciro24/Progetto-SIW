@@ -64,6 +64,7 @@
 
 <head>
   <title>Nuova Recensione</title>
+      <security:csrf th:href="@{/csrf}"></security:csrf> </head>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
@@ -108,7 +109,7 @@
                 <label for="commento">Commento:</label>
                 <textarea id="commento" name="commento" class="form-control" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Invia Recensione</button>
+            <button type="submit">Invia Recensione</button>
         </form>
        
     </div>

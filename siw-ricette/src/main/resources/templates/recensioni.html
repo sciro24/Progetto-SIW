@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>ELENCO RICETTE</title>
+	<title>Elenco Recensioni</title>
 	<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
@@ -23,7 +23,8 @@
 	
 	<body>
     <div class="container">
-        <h2>Lista Recensioni</h2>
+        <h2>Elenco Recensioni</h2>
+        <div th:if="${recensioni == null || recensioni.isEmpty()}">Non ci sono ricette nel sistema</div>
         <table class="table">
             <thead>
                 <tr>
@@ -38,7 +39,7 @@
                     <td th:text="${recensione.ricetta.nome}">Ricetta</td>
                     <td th:text="${recensione.voto}">Voto</td>
                     <td th:text="${recensione.commento}">Commento</td>
-                    <td th:text="${recensione.utente.nome}">Utente</td>
+                   <!--  <td th:text="${recensione.utente.nome}">Utente</td> -->
                 </tr>
             </tbody>
         </table>

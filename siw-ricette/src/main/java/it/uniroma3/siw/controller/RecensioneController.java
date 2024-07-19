@@ -53,8 +53,9 @@ public class RecensioneController {
 		// Salva la recensione
 		recensioneService.save(recensione);
 
-		return "recensioni.html";
+		return "recensione.html";
 	}
+
 	
 	@GetMapping(value="/admin/indexRecensione")
 	public String indexRecensione() {
@@ -63,11 +64,19 @@ public class RecensioneController {
 
 
 	@GetMapping("/recensioni/ricetta")
-	public String trovaRecensioniPerRicetta(@RequestParam Long ricettaId, Model model) {
+	public String trovaRecensionePerRicetta(@RequestParam Long ricettaId, Model model) {
 		Ricetta ricetta = ricettaService.findById(ricettaId);
 		List<Recensione> recensioni = recensioneService.findByRicetta(ricetta);
 		model.addAttribute("recensioni", recensioni);
-		return "listaRecensioni";
+		return "recensioni.html";
+	}
+	
+	@GetMapping("/recensioni/utente")
+	public String trovaRecensionePerUtente(@RequestParam Long utenteId, Model model) {
+		Utente utente = utenteService.getUser(utenteId);
+		List<Recensione> recensioni = recensioneService.findByUtente(utente);
+		model.addAttribute("recensioni", recensioni);
+		return "recensioni.html";
 	}
 
 
