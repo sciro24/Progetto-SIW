@@ -2,28 +2,30 @@
 <html>
 
 <head>
-	<nome>
-		Nuova Ricetta
-	</nome>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<title>Aggiorna</title>
+	<link rel="stylesheet" href="/css/stile2.css" />
 </head>
 
 <body>
+	<div class="container">
 
 	<!-- PULSANTE LOGIN/LOGOUT -->
-	<header>
-		
-	<div th:if="${userDetails}">
-	   <span th:text="${userDetails.username}"></span>
-	   <a href="/logout">Logout</a>
-	</div>
-	<div sec:authorize="!isAuthenticated()">
-	   <a href="/login">Login</a>
-	</div>
+	    <header>
+            <nav>
+                <a href="/" id="home-button">Home</a>
+                <div class="auth-buttons">
+                    <div th:if="${userDetails}">
+                        <span th:text="${userDetails.username}"></span>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-	</header>
-
-	<div><a href="/"><img src="/images/logo-siw.png" width="10%" /></a></div>
+	<div><img src="/images/logo-siw.png" width="10%" /></a></div>
 	<h1>Aggiorna Ricetta</h1>
 	<div th:if="${ricetta}">
 		<div>
@@ -37,7 +39,7 @@
 				<span th:text="${ingrediente.nome}">Pomodoro</span>
 			</div>
 			<a th:href="@{'/admin/updateIngredienti/' + ${ricetta.id}}">
-				<button type="button">Modifica</button>
+				<div type="text">Modifica</div>
 			</a>
 		</div>
 		<div th:unless="${ricetta}">Ricetta non esistente</div>

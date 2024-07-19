@@ -117,7 +117,7 @@ public class RicettaController {
 	}
 
 	@GetMapping(value="/admin/addIngredienteToRicetta/{ingredienteId}/{ricettaId}")
-	public String addActorToMovie(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
+	public String addIngredienteToRicetta(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = this.ricettaService.findById(ricettaId);
 		Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).get();
 		Set<Ingrediente> ingredienti = ricetta.getIngredienti();

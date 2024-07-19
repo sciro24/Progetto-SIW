@@ -10,19 +10,22 @@
 	<div class="container">
 
 	<!-- PULSANTE LOGIN/LOGOUT -->
-	<header>
-		
-	<div th:if="${userDetails}">
-	   <span th:text="${userDetails.username}"></span>
-	   <a href="/logout">Logout</a>
-	</div>
-	<div sec:authorize="!isAuthenticated()">
-	   <a href="/login">Login</a>
-	</div>
+	    <header>
+            <nav>
+                <a href="/" id="home-button">Home</a>
+                <div class="auth-buttons">
+                    <div th:if="${userDetails}">
+                        <span th:text="${userDetails.username}"></span>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-	</header>
-
-		<div><a href="/"><img src="/images/logo-siw.png" width="10%"/></a></div>
+		<div><img src="/images/logo-siw.png" width="10%"/></a></div>
 		<h1>Gestione Ingredienti</h1>
 		<div>
 			<a href="/admin/formNewIngrediente">Inserisci un nuovo Ingrediente</a>

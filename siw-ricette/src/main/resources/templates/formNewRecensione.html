@@ -48,11 +48,16 @@
 	}
 
 
-	/* Add padding to container elements */
 	.container {
-		background-color: #ddd;
-		padding: 16px;
-	}
+    width: 70%; /* Fissa la larghezza al 70% della larghezza del viewport */
+    max-width: 1000px; /* Imposta una larghezza massima di 1000px */
+    height: 600px; /* Fissa l'altezza a 600px */
+    margin: 0 auto; /* Centra il container orizzontalmente */
+    padding: 20px;
+    background-color: #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Aggiunge una barra di scorrimento verticale se il contenuto eccede l'altezza fissata */
+}
 
 	/* Clear floats */
 	.clearfix::after {
@@ -65,25 +70,28 @@
 <head>
   <title>Nuova Recensione</title>
       <security:csrf th:href="@{/csrf}"></security:csrf> </head>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/stile2.css" />
 </head>
 
 <body>
-	
-	<!-- PULSANTE LOGIN/LOGOUT -->
-	<header>
-		
-	<div th:if="${userDetails}">
-	   <span th:text="${userDetails.username}"></span>
-	   <a href="/logout">Logout</a>
-	</div>
-	<div sec:authorize="!isAuthenticated()">
-	   <a href="/login">Login</a>
-	</div>
+	<div class="container">
 
-	</header>
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	    <header>
+            <nav>
+                <a href="/" id="home-button">Home</a>
+                <div class="auth-buttons">
+                    <div th:if="${userDetails}">
+                        <span th:text="${userDetails.username}"></span>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a href="/login">Login</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
 	
-    <div class="container">
         <h2>Scrivi una Recensione</h2>
         <form th:action="@{/recensioni}" method="post">
             <div class="form-group">
