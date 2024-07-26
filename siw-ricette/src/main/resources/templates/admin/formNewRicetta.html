@@ -27,7 +27,7 @@
 
   <div><img src="/images/logo-siw.png" width="10%"/></a></div>
   <h1>Aggiungi una ricetta</h1>
-  <form th:action="@{/admin/ricetta}" method="POST" th:object="${ricetta}" enctype="multipart/form-data">
+  <form th:action="@{/admin/ricetta}" method="POST" th:object="${ricetta}">
     <div th:if="${#fields.hasGlobalErrors()}">
       <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
     </div>
@@ -55,7 +55,9 @@
 
     <div>
       <label>Immagine (url):</label>
-      <input type="text" th:field="${ricetta.urlOfPicture}" />
+      <span><input type="text" th:field="${ricetta.urlOfPicture}" /></span>
+      <span th:if="${#fields.hasErrors('urlOfPicture')}" th:errors="*{urlOfPicture}">
+      </span>
     </div>
 
     <div>
