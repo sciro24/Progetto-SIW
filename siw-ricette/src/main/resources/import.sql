@@ -13,12 +13,12 @@ insert into credenziali(id, password, role, username, utente_id) values (3, '$2a
 
 
 -- Inserimento Ricette
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (1, 'Cuoci la pasta in acqua salata. In una padella, scalda olio e aggiungi pomodori pelati schiacciati. Cuoci fino a ottenere una salsa densa. Mescola con la pasta cotta e servi.', 'Pasta al Pomodoro', 30);
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (2, 'Soffriggi cipolla in burro, aggiungi riso e tosta per alcuni minuti. Versa brodo caldo poco alla volta fino a cottura completa. Aggiungi funghi trifolati e parmigiano. Mescola e servi caldo.', 'Risotto ai Funghi', 45);
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (3, 'Prepara una base con pomodoro e mozzarella su pasta per pizza. Cuoci in forno fino a doratura. Aggiungi basilico fresco prima di servire.', 'Pizza Margherita', 60);
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (4, 'Cuoci pasta in acqua salata. In una padella, rosola pancetta, aggiungi uova sbattute e pecorino. Mescola con pasta cotta, crea una crema senza cuocere troppo.', 'Pasta alla Carbonara', 25);
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (5, 'Rosola guanciale in padella. Aggiungi pomodoro e cuoci fino a ridurre. Mescola con pasta cotta e pecorino. Servi con pepe nero a piacere.', 'Pasta Amatriciana', 35);
-insert into ricetta(id, descrizione, nome, tempo_preparazione) values (6, 'Cuoci pasta e scolala. In una padella, sciogli pecorino con un po’ di acqua di cottura. Aggiungi pepe macinato e mescola con pasta.', 'Cacio e Pepe', 20);
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (1, 'Cuoci la pasta in acqua salata. In una padella, scalda olio e aggiungi pomodori pelati schiacciati. Cuoci fino a ottenere una salsa densa. Mescola con la pasta cotta e servi.', 'Pasta al Pomodoro', 30, 'https://www.giallozafferano.it/images/221-22163/Spaghetti-al-pomodoro_450x300.jpg');
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (2, 'Soffriggi cipolla in burro, aggiungi riso e tosta per alcuni minuti. Versa brodo caldo poco alla volta fino a cottura completa. Aggiungi funghi trifolati e parmigiano. Mescola e servi caldo.', 'Risotto ai Funghi', 45, '');
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (3, 'Prepara una base con pomodoro e mozzarella su pasta per pizza. Cuoci in forno fino a doratura. Aggiungi basilico fresco prima di servire.', 'Pizza Margherita', 60, '');
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (4, 'Cuoci pasta in acqua salata. In una padella, rosola pancetta, aggiungi uova sbattute e pecorino. Mescola con pasta cotta, crea una crema senza cuocere troppo.', 'Pasta alla Carbonara', 25, '');
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (5, 'Rosola guanciale in padella. Aggiungi pomodoro e cuoci fino a ridurre. Mescola con pasta cotta e pecorino. Servi con pepe nero a piacere.', 'Pasta Amatriciana', 35, '');
+insert into ricetta(id, descrizione, nome, tempo_preparazione, url_of_picture) values (6, 'Cuoci pasta e scolala. In una padella, sciogli pecorino con un po’ di acqua di cottura. Aggiungi pepe macinato e mescola con pasta.', 'Cacio e Pepe', 20, '');
 
 
 

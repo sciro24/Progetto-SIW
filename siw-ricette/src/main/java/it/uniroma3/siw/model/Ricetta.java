@@ -27,31 +27,30 @@ public class Ricetta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@SequenceGenerator(initialValue = 1, allocationSize = 1, name = "id")
 	public Long id;
-	
+
 	@Column(unique=true, nullable=false, length=20)
 	@NotBlank(message = "Il nome non può essere vuoto")
 	private String nome;
-	
+
 	@NotBlank(message = "La descrizione non può essere vuota")
-    @Size(min = 1, max = 1000, message = "La descrizione deve contenere tra {min} e {max} caratteri")
+	@Size(min = 1, max = 1000, message = "La descrizione deve contenere tra {min} e {max} caratteri")
 	private String descrizione;
-	
+
 
 	@ManyToMany
 	private Set<Ingrediente> ingredienti;
-	
+
 	@OneToMany(mappedBy = "ricetta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Recensione> recensioni = new ArrayList<>();
+	private List<Recensione> recensioni = new ArrayList<>();
 
 
 	@Column(nullable = false)
 	@Min(value = 1, message = "Il tempo di preparazione deve essere almeno 1")
 	@NotNull(message = "Il tempo di preparazione non può essere nullo")
 	private Integer tempoPreparazione;
-	
-//	@Column(length = 2000)
-//	public String immagine; //percorso immagine
-	
+
+	private String urlOfPicture;
+
 	public Long getId() {
 		return id;
 	}
@@ -64,7 +63,7 @@ public class Ricetta {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getDescrizione() {
 		return descrizione;
 	}
@@ -78,42 +77,41 @@ public class Ricetta {
 	public void setTempoPreparazione(Integer tempoPreparazione) {
 		this.tempoPreparazione = tempoPreparazione;
 	}
-	
-	 public Set<Ingrediente> getIngredienti() {
-         return ingredienti;
-     }
- 
-     public void setIngredienti(Set<Ingrediente> ingredienti) {
-         this.ingredienti = ingredienti;
-     }
-     
-     public List<Recensione> getRecensioni() {
-         return recensioni;
-     }
- 
-     public void setRecensioni(List<Recensione> recensioni) {
-         this.recensioni = recensioni;
-     }
-     
-     public void addRecensione(Recensione recensione) {
-         recensioni.add(recensione);
-         recensione.setRicetta(this);
-     }
 
-     public void removeRecensione(Recensione recensione) {
-         recensioni.remove(recensione);
-         recensione.setRicetta(null);
-     }
-     
+	public Set<Ingrediente> getIngredienti() {
+		return ingredienti;
+	}
 
-//     public String getImmagine() {
-//         return immagine;
-//     }
-//
-//     public void setImmagine(String immagine) {
-//         this.immagine = immagine;
-//     }
-     
+	public void setIngredienti(Set<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
+
+	public List<Recensione> getRecensioni() {
+		return recensioni;
+	}
+
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
+
+	public void addRecensione(Recensione recensione) {
+		recensioni.add(recensione);
+		recensione.setRicetta(this);
+	}
+
+	public void removeRecensione(Recensione recensione) {
+		recensioni.remove(recensione);
+		recensione.setRicetta(null);
+	}
+
+	public String getUrlOfPicture() {
+		return urlOfPicture;
+	}
+	public void setUrlOfPicture(String urlOfPicture) {
+		this.urlOfPicture = urlOfPicture;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -128,6 +126,7 @@ public class Ricetta {
 			return false;
 		Ricetta other = (Ricetta) obj;
 		return Objects.equals(nome, other.nome);
-	}
 
+
+	}
 }

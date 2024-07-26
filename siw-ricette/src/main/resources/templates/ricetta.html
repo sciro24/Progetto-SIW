@@ -31,15 +31,15 @@
         </header>
 
   <div><img src="/images/logo-siw.png" width="10%" /></a></div>
-  <h1>Dettagli Ricetta</h1>
+  <h3>Dettagli Ricetta:</h3>
   <div th:if="${ricetta}">
     <div class="ricetta-details">
-      <h2><span th:text="${ricetta.nome}"></span></h2>
-      <img th:src="@{/images/uploaded/{imageName}(imageName=${ricetta.immagine})}" alt="Immagine Ricetta" />
-      <p><b>Tempo di preparazione:</b> <span th:text="${ricetta.tempoPreparazione}"></span> minuti</p>
+      <h1><span th:text="${ricetta.nome}"></span></h1>
+      <span><img width="30%" th:src=${ricetta.urlOfPicture} /></span>
+      <p><b>Tempo di preparazione:</b> <span th:text="${ricetta.tempoPreparazione}"></span> minuti</p><hr>
       <p><b>Descrizione: </b><span th:text="${ricetta.descrizione}"></span></p>
        <ul>
-		<b>Ingredienti usati: </b> 
+		<hr><b>Ingredienti usati: </b> 
 		<div th:if="${ricetta.ingredienti == null or ricetta.ingredienti.isEmpty()}">nessun ingrediente e' stato aggiunto</div>
 		<li th:each="ingrediente : ${ricetta.ingredienti}">
 			<a th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
@@ -53,7 +53,7 @@
   
     <!-- Elenco delle Recensioni -->
     <div>
-        <h2>Recensioni</h2>
+       <hr><h2>Recensioni</h2>
         <ul>
 			<div th:if="${ricetta.recensioni.isEmpty()}">nessuna recensione e' stata ancora aggiunta</div>
             <li th:each="recensione : ${ricetta.recensioni}">
