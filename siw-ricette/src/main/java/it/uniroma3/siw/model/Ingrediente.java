@@ -18,8 +18,8 @@ public class Ingrediente {
 	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@SequenceGenerator(initialValue = 1, allocationSize = 1, name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingrediente_generator")
+	@SequenceGenerator(name = "ingrediente_generator", sequenceName = "ingrediente_seq", allocationSize = 1)
 	public Long id;
 	
 	@Column(unique=true, nullable=false, length=20)

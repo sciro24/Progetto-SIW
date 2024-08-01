@@ -24,9 +24,9 @@ import jakarta.validation.constraints.Size;
 public class Ricetta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@SequenceGenerator(initialValue = 1, allocationSize = 1, name = "id")
-	public Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ricetta_generator")
+	@SequenceGenerator(name = "ricetta_generator", sequenceName = "ricetta_seq", allocationSize = 1)
+	private Long id;
 
 	@Column(unique=true, nullable=false, length=20)
 	@NotBlank(message = "Il nome non può essere vuoto")
