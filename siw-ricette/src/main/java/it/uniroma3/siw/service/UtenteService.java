@@ -28,10 +28,8 @@ public class UtenteService {
 
 
 	public Utente findByEmail(String email) {
-		Optional<Utente> user = this.utenteRepository.findByEmail(email);
-		return user.orElse(null);
-
-	}
+        return this.utenteRepository.findByEmail(email);
+    }
 
 	public Utente findByUsername(String username) {
 		Credenziali credenziali = this.credenzialiService.findByUsername(username);
@@ -41,6 +39,10 @@ public class UtenteService {
 
 		return null;
 	}
+	
+	public boolean existsByEmail(String email) {
+        return this.utenteRepository.existsByEmail(email);
+    }
 
 
 	@Transactional
