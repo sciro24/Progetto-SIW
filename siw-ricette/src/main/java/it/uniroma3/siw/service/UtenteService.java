@@ -24,37 +24,50 @@ public class UtenteService {
 
 	@Autowired
 	protected CredenzialiService credenzialiService;
+	
 
+	public Utente getUser(Long id) {
+		Optional<Utente> result = this.utenteRepository.findById(id);
+		return result.orElse(null);
+	}
+	
+	public boolean existsByEmail(String email) {
+		return this.utenteRepository.existsByEmail(email);
+	}
 
 
 	public Utente findByEmail(String email) {
-        return this.utenteRepository.findByEmail(email);
-    }
+		return this.utenteRepository.findByEmail(email);
+	}
 
 	public Utente findByUsername(String username) {
 		Credenziali credenziali = this.credenzialiService.findByUsername(username);
 		if (credenziali != null) { 
 			return credenziali.getUtente();
 		}
-
 		return null;
 	}
 	
-	public boolean existsByEmail(String email) {
-        return this.utenteRepository.existsByEmail(email);
+
+    @Transactional
+    public void registerUser(Utente user) {
+        if (utenteRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalArgumentException("An account with this email already exists.");
+        }
+        utenteRepository.save(user);
     }
 
 
-	@Transactional
-	public Utente getUser(Long id) {
-		Optional<Utente> result = this.utenteRepository.findById(id);
-		return result.orElse(null);
-	}
 
 	@Transactional
 	public Utente saveUser(Utente user) {
 		return this.utenteRepository.save(user);
 	}
+	
+	@Transactional
+    public List<Utente> findAll() {
+        return this.utenteRepository.findAll();
+    }
 
 	@Transactional
 	public List<Utente> getAllUsers() {

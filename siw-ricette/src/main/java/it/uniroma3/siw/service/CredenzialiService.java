@@ -1,6 +1,7 @@
 package it.uniroma3.siw.service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,13 @@ public class CredenzialiService {
     public Credenziali saveCredenziali(Credenziali credenziali) {
         credenziali.setPassword(this.passwordEncoder.encode(credenziali.getPassword()));
         return this.credenzialiRepository.save(credenziali);
+    }
+    
+    public List<Credenziali> findAll() {
+        return this.credenzialiRepository.findAll();
+    }
+
+    public void delate(Credenziali credenziali) {
+        this.credenzialiRepository.delete(credenziali);
     }
 }

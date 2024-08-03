@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,8 @@ public class Utente {
 	private String nome;
 	@NotBlank
 	private String cognome;
+	
+    @Column(unique = true)
 	@NotBlank
 	private String email;
 	
