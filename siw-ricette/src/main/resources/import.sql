@@ -55,4 +55,25 @@ insert into ricetta_ingredienti(composizioni_id, ingredienti_id) values (6, 9); 
 insert into ricetta_ingredienti(composizioni_id, ingredienti_id) values (6, 11); -- Pepe
 
 
+-- Inserimento Recensioni 
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Deliziosa! Facile da fare e molto gustosa.', 5, 1, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Il risotto era perfetto, cremoso e saporito.', 4, 2, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'La pizza era buona, ma poteva essere più croccante.', 3, 3, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Carbonara spettacolare, una delle migliori che abbia mai mangiato.', 5, 4, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Ottima Amatriciana, il guanciale era perfetto.', 4, 5, 3);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Cacio e Pepe molto buono, semplice e gustoso.', 4, 6, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'La pasta al pomodoro era deliziosa e molto facile da fare.', 5, 1, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Il risotto ai funghi era troppo cremoso per i miei gusti.', 3, 2, 3);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Pizza Margherita buona, ma la base era un po morbida.', 3, 3, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Carbonara con troppa pancetta, ma comunque buona.', 3, 4, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Amatriciana favolosa, la migliore che abbia mai mangiato.', 5, 5, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Cacio e Pepe perfetto, la cremosità era giusta.', 5, 6, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'La pasta al pomodoro era troppo semplice per i miei gusti.', 3, 1, 3);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Il risotto ai funghi aveva un sapore fantastico.', 5, 2, 1);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Pizza Margherita con ottimo equilibrio di ingredienti.', 4, 3, 3);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'La Carbonara era un po secca.', 2, 4, 3);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Amatriciana troppo salata per i miei gusti.', 2, 5, 2);
+insert into recensione(id, commento, voto, ricetta_id, utente_id) values (nextval('recensione_seq'), 'Cacio e Pepe con troppo pepe.', 2, 6, 3);
+
+
 

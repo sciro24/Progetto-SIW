@@ -18,8 +18,8 @@ public class Recensione {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@SequenceGenerator(initialValue = 1, allocationSize = 1, name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "recensione_generator")
+	@SequenceGenerator(name = "recensione_generator", sequenceName = "recensione_seq", allocationSize = 1)
 	public Long id;
 	
 	@ManyToOne
