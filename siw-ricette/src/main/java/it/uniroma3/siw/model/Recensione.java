@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Recensione {
@@ -30,13 +31,13 @@ public class Recensione {
 	@JoinColumn(name = "utente_id", nullable = false)
 	private Utente utente;
 	
-	@Min(value = 1)
-	@Max(value = 5)
+	@Min(value = 1, message = "Il voto deve essere compreso tra 1 e 5")
+    @Max(value = 5, message = "Il voto deve essere compreso tra 1 e 5")
 	@Column(nullable = false)
 	public Integer voto; 
 	
-	@Column(length = 1000)
-	public String commento;
+    @Size(max = 1000, message = "Il commento non può superare i 1000 caratteri")
+    public String commento;
 
 	public Long getId() {
 		return id;
