@@ -13,7 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Utente {
@@ -23,13 +25,17 @@ public class Utente {
 	@SequenceGenerator(name = "utente_generator", sequenceName = "utente_seq", allocationSize = 1)
 	private Long id;
 
-	@NotBlank
+    @NotBlank(message = "Il nome non può essere vuoto")
+    @Size(min = 2, max = 50, message = "Il nome deve avere tra 2 e 50 caratteri")
 	private String nome;
-	@NotBlank
+	
+    @NotBlank(message = "Il cognome non può essere vuoto")
+    @Size(min = 2, max = 50, message = "Il cognome deve avere tra 2 e 50 caratteri")
 	private String cognome;
 
 	@Column(unique = true)
-	@NotBlank
+	@NotBlank(message = "L'email non può essere vuota")
+    @Email(message = "L'email deve essere valida")
 	private String email;
 
 	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)

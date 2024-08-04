@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Credenziali {
@@ -20,11 +22,17 @@ public class Credenziali {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credenziali_generator")
 	@SequenceGenerator(name = "credenziali_generator", sequenceName = "credenziali_seq", allocationSize = 1)
 	private Long id;
-	
-    @Column(unique = true)
+
+	@Column(unique = true)
+	@NotBlank(message = "Username non può essere vuoto")
+	@Size(min = 3, max = 50, message = "Username deve avere tra 3 e 50 caratteri")
 	private String username;
-    
+
+	@NotBlank(message = "Password non può essere vuota")
+    @Size(min = 3, message = "Password deve avere almeno 3 caratteri")
 	private String password;
+	
+	
 	private String role;
 
 	@OneToOne(cascade = CascadeType.ALL)

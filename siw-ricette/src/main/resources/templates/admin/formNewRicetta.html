@@ -34,7 +34,7 @@
 
     <div>
       <label>Nome:</label>
-      <span><input type="text" th:field="${ricetta.nome}" /></span>
+      <span><input type="text" th:field="${ricetta.nome}" required/></span>
       <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
       </span>
     </div>
