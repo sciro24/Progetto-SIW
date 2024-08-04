@@ -15,5 +15,6 @@ public interface RecensioneRepository extends CrudRepository<Recensione, Long> {
     public List<Recensione> findByRicetta(Ricetta ricetta);
 	public Optional<Recensione> findById(Long id);
     public List<Recensione> findAll();
+	public boolean existsByUtenteAndRicetta(Utente utente, Ricetta ricetta);
     
 }

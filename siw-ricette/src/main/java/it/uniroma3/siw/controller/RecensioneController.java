@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.nio.file.AccessDeniedException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.controller.validator.ValidatoreRuolo;
 import it.uniroma3.siw.model.Recensione;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.service.RecensioneService;
@@ -32,14 +35,20 @@ public class RecensioneController {
 	public String formNewRecensione(Model model) {
 		model.addAttribute("recensione", new Recensione());
 		model.addAttribute("ricette", this.ricettaService.findAll());
-		
+
 		return "formNewRecensione.html";
 	}
-
+	
+	
 	@PostMapping("/recensioni")
-	public String salvaRecensione(@RequestParam Long ricettaId, @RequestParam int voto, @RequestParam String commento, UserDetails userDetails,Model model) {
+	public String salvaRecensione(@RequestParam Long ricettaId, @RequestParam int voto, @RequestParam String commento, UserDetails userDetails, Model model) throws AccessDeniedException {
 		// Recupera l'utente attualmente loggato
 		Utente utente = utenteService.findByUsername(userDetails.getUsername());
+
+		// Verifica il ruolo dell'utente
+		if (!ValidatoreRuolo.utenteDefault(utente)) {
+			throw new AccessDeniedException("Gli amministratori non possono lasciare recensioni");
+		}
 
 		// Crea una nuova recensione
 		Recensione recensione = new Recensione();
@@ -50,40 +59,23 @@ public class RecensioneController {
 
 		// Salva la recensione
 		model.addAttribute("recensione", recensione);
-		recensioneService.save(recensione);
+		recensioneService.createRecensione(recensione, utente);
 
 		return "recensione.html";
 	}
 
-	
+
 	@GetMapping(value="/admin/indexRecensione")
 	public String indexRecensione() {
 		return "admin/indexRecensione.html";
 	}
 
-
-//	@GetMapping("/recensioni/ricetta")
-//	public String trovaRecensionePerRicetta(@RequestParam Long ricettaId, Model model) {
-//		Ricetta ricetta = ricettaService.findById(ricettaId);
-//		List<Recensione> recensioni = recensioneService.findByRicetta(ricetta);
-//		model.addAttribute("recensioni", recensioni);
-//		return "recensioni.html";
-//	}
-//	
-//	@GetMapping("/recensioni/utente")
-//	public String trovaRecensionePerUtente(@RequestParam Long utenteId, Model model) {
-//		Utente utente = utenteService.getUser(utenteId);
-//		List<Recensione> recensioni = recensioneService.findByUtente(utente);
-//		model.addAttribute("recensioni", recensioni);
-//		return "recensioni.html";
-//	}
-	
 	@GetMapping("/recensione/{id}")
 	public String getRecensione(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recensione", this.recensioneService.findById(id));
 		return "recensione.html";
 	}
-	
+
 	@GetMapping("/recensione")
 	public String getRecensioni(Model model) {
 		model.addAttribute("recensioni", this.recensioneService.findAll());

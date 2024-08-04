@@ -11,31 +11,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Utente {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utente_generator")
-    @SequenceGenerator(name = "utente_generator", sequenceName = "utente_seq", allocationSize = 1)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utente_generator")
+	@SequenceGenerator(name = "utente_generator", sequenceName = "utente_seq", allocationSize = 1)
+	private Long id;
 
 	@NotBlank
 	private String nome;
 	@NotBlank
 	private String cognome;
-	
-    @Column(unique = true)
+
+	@Column(unique = true)
 	@NotBlank
 	private String email;
-	
-	 @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
-	 private List<Recensione> recensioni = new ArrayList<>();
-	
 
-    public Long getId() {
+	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Recensione> recensioni = new ArrayList<>();
+
+	@OneToOne(mappedBy = "utente")
+	private Credenziali credenziali;
+
+
+	public Long getId() {
 		return id;
 	}
 
@@ -45,44 +49,44 @@ public class Utente {
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getCognome() {
 		return cognome;
 	}
-	
+
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public List<Recensione> getRecensioni() {
-        return recensioni;
-    }
+		return recensioni;
+	}
 
-    public void setRecensioni(List<Recensione> recensioni) {
-        this.recensioni = recensioni;
-    }
-    
-    public void addRecensione(Recensione recensione) {
-        recensioni.add(recensione);
-        recensione.setUtente(this);
-    }
+	public void setRecensioni(List<Recensione> recensioni) {
+		this.recensioni = recensioni;
+	}
 
-    public void removeRecensione(Recensione recensione) {
-        recensioni.remove(recensione);
-        recensione.setUtente(null);
-    }
+	public void addRecensione(Recensione recensione) {
+		recensioni.add(recensione);
+		recensione.setUtente(this);
+	}
+
+	public void removeRecensione(Recensione recensione) {
+		recensioni.remove(recensione);
+		recensione.setUtente(null);
+	}
 
 	@Override
 	public int hashCode() {
@@ -119,5 +123,13 @@ public class Utente {
 		} else if (!email.equals(other.email))
 			return false;
 		return true;
+	}
+
+	public Credenziali getCredenziali() {
+		return credenziali;
+	}
+
+	public void setCredenziali(Credenziali credenziali) {
+		this.credenziali = credenziali;
 	}
 }
