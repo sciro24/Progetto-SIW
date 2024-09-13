@@ -52,12 +52,10 @@ public class UtenteService {
     @Transactional
     public void registerUser(Utente user) {
         if (utenteRepository.existsByEmail(user.getEmail())) {
-            throw new IllegalArgumentException("An account with this email already exists.");
+            throw new IllegalArgumentException("Un account con questa email già esiste.");
         }
         utenteRepository.save(user);
     }
-
-
 
 	@Transactional
 	public Utente saveUser(Utente user) {
@@ -73,6 +71,7 @@ public class UtenteService {
 	public List<Utente> getAllUsers() {
 		List<Utente> result = new ArrayList<>();
 		Iterable<Utente> iterable = this.utenteRepository.findAll();
+		
 		for(Utente user : iterable)
 			result.add(user);
 		return result;

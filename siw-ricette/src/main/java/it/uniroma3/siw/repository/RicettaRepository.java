@@ -13,13 +13,10 @@ public interface RicettaRepository extends CrudRepository<Ricetta, Long> {
 	
 	public Optional<Ricetta> findById(Long id);
 	
-	
 	public List<Ricetta> findByTempoPreparazione(int minuti);
 	
 	public List<Ricetta> findAll();
 
 	public boolean existsByNome(String nome);
 	
-	@SuppressWarnings("unchecked")
-	public Ricetta save(Ricetta ricetta);
 }

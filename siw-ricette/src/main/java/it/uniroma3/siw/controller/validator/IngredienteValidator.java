@@ -29,12 +29,6 @@ public class IngredienteValidator implements Validator {
 			errors.reject("NotBlank.ingrediente.nome");
 		}
 
-
-//		if(ingrediente.isVegano() == null) {
-//			errors.reject("NotNull.ricetta.tempoPreparazione");
-//		}
-		
-		
 		if (ingrediente.getNome()!=null && ingredienteRepository.existsByNome(ingrediente.getNome())) {
 			errors.reject("ingrediente.duplicate");
 		}

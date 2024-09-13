@@ -13,21 +13,21 @@ import it.uniroma3.siw.repository.IngredienteRepository;
 
 @Controller
 public class IngredienteController {
-	
+
 	@Autowired
 	private IngredienteRepository ingredienteRepository;
-	
+
 	@GetMapping(value="/admin/formNewIngrediente")
 	public String formNewIngrediente(Model model) {
 		model.addAttribute("ingrediente", new Ingrediente());
 		return "admin/formNewIngrediente.html";
 	}
-	
+
 	@GetMapping(value="/admin/indexIngrediente")
 	public String indexIngrediente() {
 		return "admin/indexIngrediente.html";
 	}
-	
+
 	@PostMapping("/admin/ingrediente")
 	public String newIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
 		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
@@ -39,7 +39,7 @@ public class IngredienteController {
 			return "admin/formNewIngrediente.html"; 
 		}
 	}
-	
+
 	@GetMapping("/ingrediente/{id}")
 	public String getIngrediente(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ingrediente", this.ingredienteRepository.findById(id).get());

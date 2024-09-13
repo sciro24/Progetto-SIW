@@ -33,7 +33,6 @@
                 <span th:if="${ingrediente.vegano}" style="color: green; font-weight: bold;">Vegano</span>
                 <span th:unless="${ingrediente.vegano}" style="color: red; font-weight: bold;">Non Vegano</span>
             </p>
-            <!-- <span><img width="5%" th:src="${ingrediente.urlOfPicture}" /></span> -->
         </div>
         <div th:unless="${ingrediente}">Non esistono ingredienti</div>
     </div>

@@ -32,6 +32,7 @@ public class AuthenticationController {
 	public String showRegisterForm (Model model) {
 		model.addAttribute("utente", new Utente());
 		model.addAttribute("credenziali", new Credenziali());
+		
 		return "formRegisterUser";
 	}
 	
@@ -49,10 +50,12 @@ public class AuthenticationController {
 		else {		
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Credenziali credenziali = credenzialiService.getCredenziali(userDetails.getUsername());
+			
 			if (credenziali.getRole().equals(Credenziali.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
 			}
 		}
+		
         return "index.html";
 	}
 		
@@ -61,24 +64,23 @@ public class AuthenticationController {
         
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credenziali credenziali = credenzialiService.getCredenziali(userDetails.getUsername());
+    	
     	if (credenziali.getRole().equals(Credenziali.ADMIN_ROLE)) {
             return "admin/indexAdmin.html";
         }
+    	
         return "index.html";
     }
 
 	@PostMapping(value = { "/register" })
-    public String registerUtente(@Valid @ModelAttribute("utente") Utente utente,
-                 BindingResult userBindingResult, @Valid
-                 @ModelAttribute("credenziali") Credenziali credenziali,
-                 BindingResult credenzialiBindingResult,
-                 Model model) {
+    public String registerUtente(@Valid @ModelAttribute("utente") Utente utente,BindingResult userBindingResult, @Valid@ModelAttribute("credenziali") Credenziali credenziali,BindingResult credenzialiBindingResult,Model model) {
 
 		// se utente e credential hanno entrambi contenuti validi, memorizza Utente e the Credenziali nel DB
         if(!userBindingResult.hasErrors() && !credenzialiBindingResult.hasErrors()) {
             utenteService.saveUser(utente);
             credenziali.setUtente(utente);
             credenzialiService.saveCredenziali(credenziali);
+            
             model.addAttribute("utente", utente);
             return "registrationSuccessful";
         }

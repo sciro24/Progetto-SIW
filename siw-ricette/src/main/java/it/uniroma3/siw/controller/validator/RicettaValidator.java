@@ -25,7 +25,6 @@ public class RicettaValidator implements Validator {
 		Ricetta ricetta = (Ricetta)o;
 		String nome = ricetta.getNome().trim();
 		String descrizione = ricetta.getDescrizione().trim();
-		//Integer tempoPreparazione = ricetta.getTempoPreparazione();
 		
 		if(nome.isEmpty()) {
 			errors.reject("NotBlank.ricetta.nome");

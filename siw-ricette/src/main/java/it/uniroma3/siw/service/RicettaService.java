@@ -1,8 +1,8 @@
 package it.uniroma3.siw.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +37,26 @@ public class RicettaService {
 		return  ricettaRepository.findAll();
 	}
 	
-	 public List<Ricetta> findVegane() {
-	        return ricettaRepository.findAll().stream()
-	                .filter(ricetta -> ricetta.getIngredienti().stream().allMatch(Ingrediente::isVegano))
-	                .collect(Collectors.toList());
+	public List<Ricetta> findVegane() {
+	    List<Ricetta> tutteLeRicette = ricettaRepository.findAll();
+	    List<Ricetta> ricetteVegane = new ArrayList<>();
+
+	    for (Ricetta ricetta : tutteLeRicette) {
+	        boolean tuttiIngredientiVegani = true;
+	        for (Ingrediente ingrediente : ricetta.getIngredienti()) {
+	            if (!ingrediente.isVegano()) {
+	                tuttiIngredientiVegani = false;
+	                break; // Esce dal ciclo se trova un ingrediente non vegano
+	            }
+	        }
+
+	        if (tuttiIngredientiVegani) {
+	            ricetteVegane.add(ricetta);
+	        }
 	    }
+
+	    return ricetteVegane;
+	}
 
 	public Ricetta save(Ricetta ricetta) {
 		return this.ricettaRepository.save(ricetta);

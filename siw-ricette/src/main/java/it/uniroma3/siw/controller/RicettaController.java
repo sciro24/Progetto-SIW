@@ -62,9 +62,8 @@ public class RicettaController {
 	@PostMapping("/admin/ricetta")
 	public String newRicetta(@Valid @ModelAttribute("ricetta") Ricetta ricetta, BindingResult bindingResult, Model model, UserDetails userDetails) {
 		this.ricettaValidator.validate(ricetta, bindingResult);
+		
 		if (!bindingResult.hasErrors()) {
-
-			// Salva la ricetta
 			this.ricettaService.save(ricetta);
 			model.addAttribute("ricetta", ricetta);
 			return "ricetta.html";
@@ -119,6 +118,7 @@ public class RicettaController {
 	public String addIngredienteToRicetta(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = this.ricettaService.findById(ricettaId);
 		Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).get();
+		
 		Set<Ingrediente> ingredienti = ricetta.getIngredienti();
 		ingredienti.add(ingrediente);
 		this.ricettaService.save(ricetta);
@@ -135,6 +135,7 @@ public class RicettaController {
 	public String removeIngredienteFromRicetta(@PathVariable("ingredienteId") Long ingredienteId, @PathVariable("ricettaId") Long ricettaId, Model model) {
 		Ricetta ricetta = this.ricettaService.findById(ricettaId);
 		Ingrediente ingrediente = this.ingredienteRepository.findById(ingredienteId).get();
+		
 		Set<Ingrediente> ingredienti = ricetta.getIngredienti();
 		ingredienti.remove(ingrediente);
 		this.ricettaService.save(ricetta);
