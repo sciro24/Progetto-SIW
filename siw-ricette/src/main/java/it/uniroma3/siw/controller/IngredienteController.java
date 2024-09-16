@@ -30,6 +30,7 @@ public class IngredienteController {
 
 	@PostMapping("/admin/ingrediente")
 	public String newIngrediente(@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model) {
+		
 		if (!ingredienteRepository.existsByNome(ingrediente.getNome())) {
 			this.ingredienteRepository.save(ingrediente); 
 			model.addAttribute("ingrediente", ingrediente);

@@ -151,7 +151,7 @@ public class RicettaController {
 	private List<Ingrediente> ingredientiToAdd(Long ricettaId) {
 		List<Ingrediente> ingredientiToAdd = new ArrayList<>();
 
-		for (Ingrediente i : ingredienteRepository.findIngredientiNotInRicetta(ricettaId)) {
+		for (Ingrediente i : ingredienteRepository.findIngredientiLiberi(ricettaId)) {
 			ingredientiToAdd.add(i);
 		}
 		return ingredientiToAdd;
