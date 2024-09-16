@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Ingrediente {
@@ -29,6 +30,7 @@ public class Ingrediente {
 	@ManyToMany(mappedBy = "ingredienti")
 	private Set<Ricetta> composizioni;
 	
+	@NotNull
 	private boolean vegano;
 	
 	public Ingrediente() {
