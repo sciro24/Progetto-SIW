@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Ingrediente;
+import it.uniroma3.siw.model.Ricetta;
 import it.uniroma3.siw.repository.IngredienteRepository;
+import it.uniroma3.siw.repository.RicettaRepository;
 import it.uniroma3.siw.service.IngredienteService;
 import jakarta.validation.Valid;
 
@@ -22,6 +25,7 @@ public class IngredienteController {
 
 	@Autowired IngredienteRepository ingredienteRepository;
 	@Autowired IngredienteService ingredienteService;
+	@Autowired RicettaRepository ricettaRepository;
 
 
 	@GetMapping(value="/admin/formNewIngrediente")
@@ -78,6 +82,51 @@ public class IngredienteController {
 		model.addAttribute("ingrediente", ingrediente);
 
 		return "ingrediente.html"; 
+	}
+	
+	@GetMapping(value="/admin/formEliminaIngrediente")
+	public String formEliminaIngrediente(@RequestParam(value = "id", required = false) Long id, Model model) {
+		
+		List<Ingrediente> ingredienti = ingredienteService.findAll();
+		
+		Ingrediente ingrediente;
+		if(id != null) {
+			ingrediente = this.ingredienteRepository.findById(id).orElse(new Ingrediente());
+		}else {
+			ingrediente = new Ingrediente();
+		}
+		
+		model.addAttribute("ingrediente",ingrediente);
+		model.addAttribute("ingredienti",ingredienti);
+	
+		return "admin/formEliminaIngrediente.html";
+	}
+	
+	@PostMapping("/admin/eliminaIngrediente")
+	public String deleteIngrediente(@RequestParam("id") Long id, Model model) {
+	    
+	    Ingrediente ingrediente = this.ingredienteRepository.findById(id).orElse(null);
+	    
+	    if (ingrediente == null) {
+	        // Se l'ingrediente non esiste, torna alla pagina di eliminazione o visualizza un messaggio
+	        model.addAttribute("errorMessage", "Ingrediente non trovato.");
+	        List<Ingrediente> ingredienti = ingredienteRepository.findAll();
+	        model.addAttribute("ingredienti", ingredienti);
+	        return "admin/formEliminaIngrediente.html"; 
+	    }
+	    
+	    Set<Ricetta> ricette = ricettaRepository.findByIngredienti_Id(id);
+	    if (!ricette.isEmpty()) {
+	        model.addAttribute("errorMessage", "Non puoi eliminare l'ingrediente perché è utilizzato in una o più ricette.");
+	        List<Ingrediente> ingredienti = ingredienteRepository.findAll();
+	        model.addAttribute("ingredienti", ingredienti);
+	        return "admin/formEliminaIngrediente.html";
+	    }
+
+
+	    ingredienteRepository.delete(ingrediente); 
+
+	    return "eliminato.html"; 
 	}
 	
 	

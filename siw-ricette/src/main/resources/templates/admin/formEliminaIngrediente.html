@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+    <title>Elimina Ingrediente</title>
+    <link rel="stylesheet" href="/css/form2.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="/images/logo-siw.png" width="30%" alt="Logo SIW" />
+        </div>
+
+        <h1>ELIMINA INGREDIENTE</h1>
+
+        <section>
+            <form th:action="@{/admin/eliminaIngrediente}" th:object="${ingrediente}" method="post">
+    <label for="ingredienteSelezionato">Seleziona un ingrediente:</label>
+    <select id="ingredienteSelezionato" th:field="*{id}">
+        <option th:each="ingrediente : ${ingredienti}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}"></option> 
+    </select>
+
+    <h3>Vuoi eliminare l'ingrediente selezionato?</h3>
+
+    <button type="submit" style="color: red;"> ELIMINA</button>
+</form>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+        </section>
+    </div>
+</body>
+
+</html>

@@ -61,4 +61,5 @@ public class RicettaService {
 	public Ricetta save(Ricetta ricetta) {
 		return this.ricettaRepository.save(ricetta);
 	}
+	
 }

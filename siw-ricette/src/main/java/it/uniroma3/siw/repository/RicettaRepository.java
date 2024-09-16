@@ -2,6 +2,7 @@ package it.uniroma3.siw.repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,5 +19,7 @@ public interface RicettaRepository extends CrudRepository<Ricetta, Long> {
 	public List<Ricetta> findAll();
 
 	public boolean existsByNome(String nome);
+	
+	public Set<Ricetta> findByIngredienti_Id(Long ingrdienteId);
 	
 }

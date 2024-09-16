@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ELIMINATO</title>
+	<link rel="stylesheet" href="/css/stile2.css" />
+</head>
+
+<body>
+	<div class="container">
+
+	
+	<!-- PULSANTE LOGIN/LOGOUT -->
+	<header>
+		
+	<div th:if="${userDetails}">
+	   <span th:text="${userDetails.username}"></span>
+	   <a href="/logout">Logout</a>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+	   <a href="/login">Login</a>
+	</div>
+
+	</header>
+	
+	
+	<div><img src="/images/logo-siw.png" width="10%" /></div>
+	<h1>ELEMENTO ELIMINATO CON SUCCESSO</h1>
+    <a href="/">Torna alla homepage</a>
+    </div>
+
+
+</body>
+
+</html>
