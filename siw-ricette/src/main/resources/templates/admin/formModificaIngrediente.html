@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+<head>
+    <title>Modifica Ingrediente</title>
+    <link rel="stylesheet" href="/css/form2.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <img src="/images/logo-siw.png" width="30%" alt="Logo SIW" />
+        </div>
+
+        <h1>MODIFICA INGREDIENTE</h1>
+
+        <section>
+            <form th:action="@{/admin/modificaIngrediente}" th:object="${ingrediente}" method="post">
+    <label for="ingredienteSelezionato">Seleziona un ingrediente:</label>
+    <select id="ingredienteSelezionato" th:field="*{id}">
+        <option th:each="ingrediente : ${ingredienti}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}"></option> 
+    </select>
+
+    <h3>Modifica informazioni ingrediente</h3>
+
+    <label for="nome">Nome dell' Ingrediente:</label>
+    <input type="text" id="nome" th:field="*{nome}" />
+    <br><br>
+
+   <label for=" vegano">Vegano:</label>
+      <input type="checkbox" id="vegano" name="vegano" th:field="${ingrediente.vegano}">
+    <br><br>
+
+    <button type="submit">Salva Modifiche</button>
+</form>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+        </section>
+    </div>
+</body>
+
+</html>
